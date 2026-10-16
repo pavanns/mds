@@ -120,6 +120,7 @@ mds_keycloak_users:
   - { username: mds-admin, first_name: MDS, last_name: Admin, email: mds-admin@mds.local, roles: [MASTER_DATA_ADMIN] }
   - { username: mds-maker, first_name: Catalogue, last_name: Maker, email: mds-maker@mds.local, roles: [MASTER_DATA_MAKER] }
   - { username: mds-checker, first_name: Catalogue, last_name: Checker, email: mds-checker@mds.local, roles: [MASTER_DATA_CHECKER] }
+  - { username: alex.carter, first_name: Alex, last_name: Carter, email: alex.carter@mds.local, roles: [MASTER_DATA_ADMIN] }
 
 # Option B settings (ignored in standalone mode)
 mds_iam_url: https://iam.example.gov
