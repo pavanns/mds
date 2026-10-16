@@ -107,12 +107,16 @@ mds_keycloak_roles:
   MASTER_DATA_ADMIN: "Everything: create, edit, delete and approve/publish reference data and geography"
   MASTER_DATA_MAKER: "Maker: create, edit and delete drafts, submit them for approval"
   MASTER_DATA_CHECKER: "Checker: approve or reject submitted drafts and publish releases"
+  MASTER_DATA_GEO_ADMIN: "Geography admin: create, edit, delete and approve administrative levels and boundaries"
 mds_role_permissions:
   MASTER_DATA_ADMIN: [referenceData:create, referenceData:edit, referenceData:delete, referenceData:publish,
                       geo:create, geo:edit, geo:delete, geo:publish]
   MASTER_DATA_MAKER: [referenceData:create, referenceData:edit, referenceData:delete,
                       geo:create, geo:edit, geo:delete]
   MASTER_DATA_CHECKER: [referenceData:publish, geo:publish]
+  MASTER_DATA_GEO_ADMIN: [geo:create, geo:edit, geo:delete, geo:publish]
+# Permissions are per kind (referenceData = all code lists, geo = geography), not per
+# catalogue: a maker can edit every list. The organisations below are for people to read.
 # Users created in every realm (initial passwords: Secret mds-keycloak-users in the env
 # namespace). Add people here, or in the Keycloak console (Users, then Role mapping >
 # Assign role > Filter by clients > master-data). Override per environment with the same name.
@@ -120,7 +124,17 @@ mds_keycloak_users:
   - { username: mds-admin, first_name: MDS, last_name: Admin, email: mds-admin@mds.local, roles: [MASTER_DATA_ADMIN] }
   - { username: mds-maker, first_name: Catalogue, last_name: Maker, email: mds-maker@mds.local, roles: [MASTER_DATA_MAKER] }
   - { username: mds-checker, first_name: Catalogue, last_name: Checker, email: mds-checker@mds.local, roles: [MASTER_DATA_CHECKER] }
+  # Ministry of Agriculture (MoA): crops, seeds, inputs
+  - { username: moa.maker, first_name: Abebe, last_name: Tadesse, email: moa.maker@mds.local, roles: [MASTER_DATA_MAKER] }
+  - { username: moa.checker, first_name: Tigist, last_name: Alemu, email: moa.checker@mds.local, roles: [MASTER_DATA_CHECKER] }
+  # Livestock Development Institute (LDI): livestock catalogues, maker and checker
+  - { username: ldi.specialist, first_name: Dawit, last_name: Bekele, email: ldi.specialist@mds.local, roles: [MASTER_DATA_MAKER, MASTER_DATA_CHECKER] }
+  # Central Statistical Agency (CSA): administrative levels and boundaries
+  - { username: csa.admin, first_name: Sara, last_name: Haile, email: csa.admin@mds.local, roles: [MASTER_DATA_GEO_ADMIN] }
+  # Global administration
   - { username: alex.carter, first_name: Alex, last_name: Carter, email: alex.carter@mds.local, roles: [MASTER_DATA_ADMIN] }
+  - { username: nina.patel, first_name: Nina, last_name: Patel, email: nina.patel@mds.local, roles: [MASTER_DATA_ADMIN] }
+  - { username: staff, first_name: Local, last_name: Developer, email: staff@mds.local, roles: [MASTER_DATA_ADMIN] }
 
 # Option B settings (ignored in standalone mode)
 mds_iam_url: https://iam.example.gov
